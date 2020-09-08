@@ -11,7 +11,7 @@ def ecr_login      = "not_yet"
 def image_tag      = "${ecr_url}/${ecr_repo}:${app_ver}"
 def label          = "jenkins-slave-jnlp-${UUID.randomUUID().toString()}"
 
-podTemplate(label: lable, cloud: 'kubernetes', serviceAccount: 'jenkins',
+podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
         containers: [
                containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:3.27-1', args: '${computer.jnlpmac} ${computer.name}',
                    envVars: [
