@@ -6,7 +6,7 @@ def ecr_repo       = "react-frontend-dualcidr"
 def namespace      = "fruits"
 def app            = "react-frontend"
 def app_ver        = "1.0"
-def ecr_login      = "not_yet"
+def ecr_credential = "not_yet"
 
 def image_tag      = "${ecr_url}/${ecr_repo}:${app_ver}"
 def label          = "jenkins-slave-jnlp-${UUID.randomUUID().toString()}"
@@ -42,10 +42,9 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                 stage('ECR Login') {
                     container('awscli') {
                         echo "ecr logining "
-                        sh "aws ecr get-login --region ap-northeast-2 | cut -d' ' -f1,2,3,4,5,6,9"
-                        ecr_login = sh(script: "aws ecr get-login --region ap-northeast-2 | cut -d' ' -f1,2,3,4,5,6,9", returnStdout:true)
-                        sh "echo ${ecr_login}"
-                        echo " ... ${ecr_login}"
+                        sh "aws ecr get-login-password --region ap-northeast-2"
+                        ecr_credential = sh(script: "aws ecr get-login-password --region ap-northeast-2", returnStdout:true)
+                        echo ".. ${ecr_credential}"
                     }
                 }
 
@@ -53,7 +52,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     container('docker') {
                         echo "docker building ..."
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
-                        sh "${ecr_login}"
+                        sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
                     }
                 }
