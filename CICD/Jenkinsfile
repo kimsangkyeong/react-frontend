@@ -1,5 +1,5 @@
 // test
-def git_url        = "https://github.com/kimsangkyeong/react-frontend"
+def git_url        = "https://github.com/kimsangkyeong/react-frontend.git"
 def git_credential = "mygituser"
 def ecr_url        = "847322629192.dkr.ecr.ap-northeast-2.amazonaws.com"
 def ecr_repo       = "react-frontend-dualcidr"
