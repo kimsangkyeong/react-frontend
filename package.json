@@ -14,7 +14,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "export PORT=8081 && react-scripts start",
+    "start": "react-scripts start",
     "_comment_linux_start": "export PORT=8081 && react-scripts start",
     "_comment_windows_start": "set PORT=8081 && react-scripts start",
     "build": "react-scripts build",
