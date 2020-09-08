@@ -1,10 +1,5 @@
-//
-// aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 847322629192.dkr.ecr.ap-northeast-2.amazonaws.com
-// docker build -t react-frontend-dualcidr .
-// docker tag react-frontend-dualcidr:latest 847322629192.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend-dualcidr:latest
-// docker push 847322629192.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend-dualcidr:latest
-
-def git_url        = "https://github.com/kimsangkyeong/react-frontend.git"
+// test
+def git_url        = "https://github.com/kimsangkyeong/react-frontend"
 def git_credential = "mygituser"
 def ecr_url        = "847322629192.dkr.ecr.ap-northeast-2.amazonaws.com"
 def ecr_repo       = "react-frontend-dualcidr"
