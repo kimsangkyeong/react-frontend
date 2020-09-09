@@ -44,7 +44,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     echo 'npm install'
                     sh 'ls -al'
                     sh 'pwd'
-                    sh 'pwd &amp;&amp; ls -al'
+                    sh 'pwd; ls -al'
                 }
 
                 stage('ECR Login') {
