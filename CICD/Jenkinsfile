@@ -42,9 +42,10 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 
                 stage('build the source code via npm') {
                     container('node') {
-                        echo 'npm install'
-                        sh 'npm install'
-                        sh 'npm install react-scripts@3.4.3 -g'
+                        //sh 'npm install'
+                        //sh 'npm install react-scripts@3.4.3 -g'
+                        sh 'npm ci --only=production'
+                        sh 'npm ci --only=production react-scripts@3.4.3 -g'
                     }
                 }
 
