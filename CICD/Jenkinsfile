@@ -40,11 +40,10 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     git branch: "master", url: "${git_url}", credentialsId: "${git_credential}"
                 }
 
-                stage('uild the source code via npm') {
+                stage('build the source code via npm') {
                     echo 'npm install'
-                    sh 'ls -al'
-                    sh 'pwd'
-                    sh 'pwd; ls -al'
+                    sh 'npm install'
+                    sh 'npm install react-scripts@3.4.3 -g'
                 }
 
                 stage('ECR Login') {
