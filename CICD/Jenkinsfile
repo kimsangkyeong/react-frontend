@@ -41,10 +41,10 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                 }
 
                 stage('uild the source code via npm') {
-                    echo "npm install"
-                    sh "ls -al"
-                    sh "pwd"
-                    sh "pwd &amp;&amp; ls -al"
+                    echo 'npm install'
+                    sh 'ls -al'
+                    sh 'pwd'
+                    sh 'pwd &amp;&amp; ls -al'
                 }
 
                 stage('ECR Login') {
