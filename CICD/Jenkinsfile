@@ -35,16 +35,46 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 )
 {
         node(label) {
+                stage('CheckOut Source') {
+                    echo "git checking out..."
+                    git branch: "master", url: "${git_url}", credentialsId: "${git_credential}"
+                }
 
                 stage('build the source code via npm') {
                     container('node') {
                         //sh 'npm install'
                         //sh 'npm install react-scripts@3.4.3 -g'
-                        sh 'which npm'
-                        echo '------------'
-                        sh 'printenv'
+                        sh 'npm ci --only=production'
+                        sh 'npm install react-scripts@3.4.3 -g'
                     }
                 }
 
+                stage('ECR Login') {
+                    container('awscli') {
+                        echo "ecr logining "
+                        sh "aws ecr get-login-password --region ap-northeast-2"
+                        ecr_credential = sh(script: "aws ecr get-login-password --region ap-northeast-2", returnStdout:true)
+                        echo ".. ${ecr_credential}"
+                    }
+                }
+
+                stage('Build Docker Image') {
+                    container('docker') {
+                        echo "docker building ..."
+                        //sh "docker info"
+                        sh "ip addr"
+                        sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
+                        sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
+                        sh "docker push ${image_tag}"
+                    }
+                }
+
+                stage('k8s deploy image = ${image_tag}') {
+                    container('kubectl') {
+                        sh "kubectl apply -f CICD/Deployment.yaml"
+                        //sh "kubectl get pod,svc,ingress,deployment -n ${namespace} -l app=${app}"
+                        sh "kubectl get pod,svc,ingress,deployment -n ${namespace} --show-labels"
+                    }
+                }
         }
 }

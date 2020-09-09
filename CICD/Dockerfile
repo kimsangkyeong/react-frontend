@@ -4,7 +4,7 @@ FROM node:12.18.3 as builder
 RUN mkdir /app
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-#COPY package.json /app/package.json
+COPY package.json /app/package.json
 #RUN npm install 
 #RUN npm install react-scripts@3.4.3 -g 
 
@@ -16,4 +16,6 @@ COPY . /app
 RUN ls -al /app
 RUN echo "....."
 RUN ls -al /app/node_modules
+RUN ls -al /app/public
+RUN printenv
 CMD ["npm", "start"]
