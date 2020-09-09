@@ -19,6 +19,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                            envVar(key: 'JVM_HEAP_MAX', value: '-Xmx192m')
                    ]
                ),
+               containerTemplate(name: 'node', image: 'node:12.18.3-alpine',             ttyEnabled: true, command: 'cat'),
                containerTemplate(name: 'awscli', image: 'amazon/aws-cli:2.0.22',             ttyEnabled: true, command: 'cat'),
                containerTemplate(name: 'docker', image: 'docker:18.06',                      ttyEnabled: true, command: 'cat',
                                  resourceLimitMemory: '128Mi'),
@@ -37,6 +38,13 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                 stage('CheckOut Source') {
                     echo "git checking out..."
                     git branch: "master", url: "${git_url}", credentialsId: "${git_credential}"
+                }
+
+                stage('uild the source code via npm') {
+                    echo "npm install"
+                    sh "ls -al"
+                    sh "pwd"
+                    sh "pwd &amp;&amp; ls -al"
                 }
 
                 stage('ECR Login') {
