@@ -15,4 +15,5 @@ EXPOSE 3000
 COPY . /app
 COPY ./public /app/public
 COPY ./src /app/src
+COPY ./node_modules /app/src
 CMD ["npm", "start"]
