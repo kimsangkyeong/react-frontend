@@ -13,9 +13,4 @@ EXPOSE 3000
 
 # 소스를 작업폴더로 복사하고 앱 실행
 COPY . /app
-RUN ls -al /app
-RUN echo "....."
-RUN ls -al /app/node_modules
-RUN ls -al /app/public
-RUN printenv
 CMD ["npm", "start"]
