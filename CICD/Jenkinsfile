@@ -45,7 +45,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                         //sh 'npm install'
                         //sh 'npm install react-scripts@3.4.3 -g'
                         sh 'npm ci --only=production'
-                        sh 'npm ci --only=production react-scripts@3.4.3 -g'
+                        sh 'npm install react-scripts@3.4.3 -g'
                     }
                 }
 
@@ -66,6 +66,14 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
+                    }
+                }
+
+                stage('k8s deploy image = ${image_tag}') {
+                    container('kubectl') {
+                        sh "kubectl apply -f CICD/Deployment.yaml"
+                        //sh "kubectl get pod,svc,ingress,deployment -n ${namespace} -l app=${app}"
+                        sh "kubectl get pod,svc,ingress,deployment -n ${namespace} --show-labels"
                     }
                 }
         }
