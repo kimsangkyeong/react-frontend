@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        app: rreact-frontend
+        app: react-frontend
     spec:
       containers:
       - name: react-frontend
