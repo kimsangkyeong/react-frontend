@@ -9,6 +9,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 #RUN npm install
 #RUN npm install react-scripts@3.4.3 -g
 RUN printenv
+RUN npm config ls -l
 
 # listen port
 EXPOSE 3000
