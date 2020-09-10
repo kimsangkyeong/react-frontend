@@ -19,7 +19,6 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                            envVar(key: 'JVM_HEAP_MAX', value: '-Xmx192m')
                    ]
                ),
-               containerTemplate(name: 'node', image: 'node:12.18.3-alpine',             ttyEnabled: true, command: 'cat'),
                containerTemplate(name: 'awscli', image: 'amazon/aws-cli:2.0.22',             ttyEnabled: true, command: 'cat'),
                containerTemplate(name: 'docker', image: 'docker:19.03',                      ttyEnabled: true, command: 'cat',
                                  resourceLimitMemory: '128Mi'),
@@ -39,23 +38,6 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     git branch: "master", url: "${git_url}", credentialsId: "${git_credential}"
                 }
 
-                environment {
-                    CI = 'true'
-                }
-
-                stage('build the source code via npm') {
-                    container('node') {
-                        //sh 'rm -rf node_modules packaage-lock.json'
-                        //sh 'npm cache clean --force'
-                        sh 'ls -al .'
-                        sh "printenv"
-                        sh 'npm install'
-                        sh "printenv"
-                        sh 'npm install react-scripts@3.4.3 -g'
-                        sh "printenv"
-                    }
-                }
-
                 stage('ECR Login') {
                     container('awscli') {
                         sh "aws ecr get-login-password --region ap-northeast-2"
@@ -66,6 +48,8 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                 stage('Build Docker Image') {
                     container('docker') {
                         sh "ip addr"
+                        sh "docker info"
+                        sh "docker network ls"
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
@@ -77,7 +61,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                         try {
                             sh "kubectl delete -f CICD/Deployment.yaml"
                         } catch (e) {
-                            println "kuectl delete error .."
+                            println "kuectl delete error. - not found ?"
                         }
                         sh "kubectl apply -f CICD/Deployment.yaml"
                         //sh "kubectl get pod,svc,ingress,deployment -n ${namespace} -l app=${app}"
