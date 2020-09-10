@@ -44,7 +44,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                         sh 'rm -rf node_modules packaage-lock.json'
                         //sh 'npm cache clean --force'
                         sh 'npm install'
-                        sh 'npm install react-scripts@3.4.0 -g'
+                        sh 'npm install react-scripts@3.4.3 -g'
                     }
                 }
 
