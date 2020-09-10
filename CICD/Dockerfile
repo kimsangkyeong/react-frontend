@@ -13,7 +13,9 @@ EXPOSE 3000
 
 # 소스를 작업폴더로 복사하고 앱 실행
 COPY . /app
+RUN  ls /app
 COPY ./public /app/public
 COPY ./src /app/src
-COPY ./node_modules /app/src
+COPY ./node_modules /app/node_modules
+RUN  ls /app
 CMD ["npm", "start"]
