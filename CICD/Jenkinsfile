@@ -21,7 +21,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                ),
                containerTemplate(name: 'node', image: 'node:12.18.3-alpine',             ttyEnabled: true, command: 'cat'),
                containerTemplate(name: 'awscli', image: 'amazon/aws-cli:2.0.22',             ttyEnabled: true, command: 'cat'),
-               containerTemplate(name: 'docker', image: 'docker:18.06',                      ttyEnabled: true, command: 'cat',
+               containerTemplate(name: 'docker', image: 'docker:19.03',                      ttyEnabled: true, command: 'cat',
                                  resourceLimitMemory: '128Mi'),
                containerTemplate(name: 'kubectl',image: 'lachlanevenson/k8s-kubectl:latest', ttyEnabled: true, command: 'cat',
                                  resourceLimitMemory: '128Mi')
