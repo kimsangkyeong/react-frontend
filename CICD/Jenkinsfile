@@ -41,7 +41,8 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 
                 stage('build the source code via npm') {
                     container('node') {
-                        sh 'export PATH=$PWD/node_modules/.bin:$PATH'
+                        sh 'rm -rf node_modules packaage-lock.json'
+                        sh 'npm cache clear -force'
                         sh 'npm install'
                         sh 'npm install react-scripts@3.4.3 -g'
                     }
