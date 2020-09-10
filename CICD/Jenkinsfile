@@ -48,7 +48,8 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                 stage('Build Docker Image') {
                     container('docker') {
                         sh "ip addr"
-                        sh "docker network create build-jenkins"
+                        sh "docker info"
+                        sh "sudo docker network create build-jenkins"
                         sh "ip addr"
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
