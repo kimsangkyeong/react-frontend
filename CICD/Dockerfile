@@ -1,6 +1,7 @@
 FROM node:12.18.3 as builder
 
 # 작업 폴더를 만들고 npm 설치
+RUN mkdir /app
 RUN mkdir /app/react-frontend
 WORKDIR /app/react-frontend
 
