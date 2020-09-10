@@ -39,6 +39,10 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     git branch: "master", url: "${git_url}", credentialsId: "${git_credential}"
                 }
 
+                environment {
+                    CI = 'true'
+                }
+
                 stage('build the source code via npm') {
                     container('node') {
                         //sh 'rm -rf node_modules packaage-lock.json'
@@ -59,7 +63,7 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 
                 stage('Build Docker Image') {
                     container('docker') {
-                        sh "ip addr'
+                        sh "ip addr"
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
