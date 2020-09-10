@@ -47,14 +47,14 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     container('node') {
                         //sh 'rm -rf node_modules packaage-lock.json'
                         //sh 'npm cache clean --force'
-                        sh 'ls -al .'
-                        sh "printenv"
+                        //sh 'ls -al .'
+                        //sh "printenv"
                         sh "npm config ls -l"
                         sh 'npm install'
-                        sh "printenv"
+                        //sh "printenv"
                         sh "npm config ls -l"
                         sh 'npm install react-scripts@3.4.3 -g'
-                        sh "printenv"
+                        //sh "printenv"
                         sh "npm config ls -l"
                     }
                 }
