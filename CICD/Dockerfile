@@ -1,4 +1,4 @@
-FROM docker:19.3 as docker
+FROM docker:19.03 as docker
 FROM node:12.18.3 as builder
 
 # 작업 폴더를 만들고 npm 설치
