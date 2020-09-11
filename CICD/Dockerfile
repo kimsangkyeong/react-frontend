@@ -16,4 +16,5 @@ EXPOSE 3000
 
 # 소스를 작업폴더로 복사하고 앱 실행
 COPY . /app
-CMD ["npm", "start"]
+//CMD ["npm", "start"]
+CMD ["sh", "-c", "tail -f /dev/null"]
