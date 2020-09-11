@@ -5,7 +5,6 @@ RUN mkdir /app
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN echo "104.16.19.35  registry.npmjs.org" >> /etc/hosts
 COPY package.json /app
 RUN npm install
 RUN npm install react-scripts@3.4.3 -g

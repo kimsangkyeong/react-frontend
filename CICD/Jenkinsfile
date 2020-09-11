@@ -66,7 +66,8 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                     container('docker') {
                         sh "ip addr"
                         sh "printenv"
-                        sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
+                        sh "docker build --add-host=registry.npmjs.org:104.16.19.35 -t ${image_tag} -f ./CICD/Dockerfile ."
+                        //sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
                     }
