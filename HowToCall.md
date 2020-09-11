@@ -19,3 +19,6 @@
       # 필요시 원격 docker repository 에 로그인 하기
         docker login -u {username} -p {password} {Server URL}
       # docker push imageId 
+
+3. 현재 AWS Route53과 연계하여 작성한 Domain으로 호출하기
+  3-1. http://app.pub.tbiz-atcl.net/ , https://app.pub.tbiz-atcl.net/
