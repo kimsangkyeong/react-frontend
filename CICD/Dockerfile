@@ -4,12 +4,13 @@ FROM node:12.18.3 as builder
 RUN mkdir /app
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-#COPY package.json /app
 
-#RUN npm install
-#RUN npm install react-scripts@3.4.3 -g
+RUN echo "104.16.19.35  registry.npmjs.org" >> /etc/hosts
+COPY package.json /app
+RUN npm install
+RUN npm install react-scripts@3.4.3 -g
 RUN printenv
-RUN npm config ls -l
+RUN "npm config list"
 
 # listen port
 EXPOSE 3000
