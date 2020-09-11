@@ -21,7 +21,7 @@ spec:
         image: 847322629192.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend-dualcidr:1.0
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 3000
           name: http
           protocol: TCP
 ---
@@ -38,7 +38,7 @@ spec:
     - name: http
       port: 3000
       protocol: TCP
-      targetPort: 80
+      targetPort: 3000
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress

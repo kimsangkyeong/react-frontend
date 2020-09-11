@@ -45,14 +45,9 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 
                 stage('build the source code via npm') {
                     container('node') {
-                        //sh 'rm -rf node_modules packaage-lock.json'
-                        //sh 'npm cache clean --force'
-                        //sh 'ls -al .'
-                        //sh "printenv"
-                        //sh "npm config ls -l"
                         sh 'npm install'
                         sh 'npm install react-scripts@3.4.3 -g'
-                        //sh 'npm run build'
+                        sh 'npm run-script build'
                     }
                 }
 
@@ -65,8 +60,6 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
 
                 stage('Build Docker Image') {
                     container('docker') {
-                        //sh "ip addr"
-                        //sh "printenv"
                         sh "docker build -t ${image_tag} -f ./CICD/Dockerfile ."
                         sh "docker login -u AWS -p '${ecr_credential}' ${ecr_url}"
                         sh "docker push ${image_tag}"
