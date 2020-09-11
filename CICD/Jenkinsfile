@@ -49,9 +49,9 @@ podTemplate(label: label, cloud: 'kubernetes', serviceAccount: 'jenkins',
                         //sh 'npm cache clean --force'
                         //sh 'ls -al .'
                         //sh "printenv"
-                        sh "npm config ls -l"
-                        //sh 'npm install'
-                        //sh 'npm install react-scripts@3.4.3 -g'
+                        //sh "npm config ls -l"
+                        sh 'npm install'
+                        sh 'npm install react-scripts@3.4.3 -g'
                         //sh 'npm run build'
                     }
                 }
