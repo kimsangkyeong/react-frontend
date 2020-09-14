@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const EMPLOYEES_REST_API_URL="http://api-backend.fruits.svc.cluster.local/api/svc/v1/employees";
-//const EMPLOYEES_REST_API_URL="http://app-bff.pub.tbiz-atcl.net/api/svc/v1/employees";
+const EMPLOYEES_REST_API_URL="http://app-bff.pub.tbiz-atcl.net/api/svc/v1/employees";
 //const EMPLOYEES_REST_API_URL="http://192.168.189.7:30001/api/v1/employees";
 //const EMPLOYEES_REST_API_URL="http://localhost:26789/api/v1/employees";
 
